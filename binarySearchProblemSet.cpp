@@ -222,6 +222,8 @@ void question6(){
     cout<<"Square root of "<<n<<" is "<<ans<<endl;
 }
 
+// Question-7 : 
+
 int main(){
 
     // question1();
