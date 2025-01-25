@@ -198,7 +198,7 @@ int main(){
     cout<<*itr<<endl;
 
 
-    // Set ----------------------------------------------------------------------------------------------------------
+    // Map ----------------------------------------------------------------------------------------------------------
     cout<<"\n\nMap\n";
 
     // it stores value in key value format and all keys will be unique and ek key ek hi value ko point kregi
