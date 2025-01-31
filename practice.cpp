@@ -4,25 +4,23 @@ using namespace std;
 
 int main(){
 
-    int t;
-	cin>>t;
-	
-	while(t--){
-	    string s;
-	    cin>>s;
-	    cout<<s<<endl;
-	    string temp="";
-	    
-	    for(int i=0;i<s.length();i++){
-	        if(s[i]=='0'){
-	            temp+='1';
-	        }
-	        else{
-	            temp+='0';
-	        }
-	    }
-	   // cout<<temp<<endl;
-	}
+    string s;
+    cin>>s;
+
+    string t;
+
+    for(int i=0;i<s.length();i++){
+        if(s[i]>='a' && s[i]<'z'){
+            t+=s[i]-'a'+'A';
+        }
+        else{
+            cout<<t<<endl;
+            t="";
+            t+=s[i]-'A'+'a';
+        }
+    }
+
+    cout<<t<<endl;
 
     return 0;
 }
