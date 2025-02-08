@@ -22,7 +22,8 @@ int main(){
 
     //  Formula IMP --> LCM(a,b) * GCD(a,b) = a*b 
 
-    // int a = __gcd(24,72);
+    // int a = __gcd(24,72); // STL library for direct value
+
     int a = gcd(24,70);
     cout<<a<<endl;
 

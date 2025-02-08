@@ -1,26 +1,22 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 
 int main(){
 
-    string s;
-    cin>>s;
+    map<int,int> mp;
 
-    string t;
+    mp[10]=100;
+    mp[20]=200;
+    mp[30]=300;
+    mp[40]=400;
 
-    for(int i=0;i<s.length();i++){
-        if(s[i]>='a' && s[i]<'z'){
-            t+=s[i]-'a'+'A';
-        }
-        else{
-            cout<<t<<endl;
-            t="";
-            t+=s[i]-'A'+'a';
-        }
+    for(auto i : mp){
+        cout<<i.first<<" "<<i.second<<endl;
     }
 
-    cout<<t<<endl;
+
+
 
     return 0;
 }

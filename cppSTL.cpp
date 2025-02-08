@@ -287,6 +287,8 @@ int main(){
         cout<<i<<" ";
     }cout<<endl;
 
+    // __gcd(a,b);   -- to calculate the gcd of two numbers;  well according to euclids algorithm gcd(a,b) = gcd(a-b,b)
+
 
     return 0;
 }
