@@ -1,5 +1,4 @@
-#include<iostream>
-#include<math.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 
@@ -9,33 +8,22 @@ int main(){
     cin>>t;
 
     while(t--){
-        int a;
-        cin>>a;
+        int n,k,p;
+        cin>>n>>k>>p;
 
-        int b;
-        cin>>b;
+        k=abs(k);
 
-        int c;
-        cin>>c;
-
-        long long int sum = a+b+c;
-
-        if(sum==6){
-            cout<<"NO\n";
+        if(p*n<k){
+            cout<<"-1\n";
             continue;
         }
 
-        sum-=3;
-
-        if(sum%7==6){
-            cout<<"YES\n";
+        if(k%p==0){
+            cout<<(k/p)<<endl;
         }
         else{
-            cout<<"NO\n";
+            cout<<((k/p)+1)<<endl;
         }
-
-
-
     }
 
     return 0;

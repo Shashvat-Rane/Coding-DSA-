@@ -4,15 +4,12 @@ using namespace std;
 
 int main(){
 
-    map<int,int> mp;
+    int t;
+    cin>>t;
 
-    mp[10]=100;
-    mp[20]=200;
-    mp[30]=300;
-    mp[40]=400;
-
-    for(auto i : mp){
-        cout<<i.first<<" "<<i.second<<endl;
+    while(t--){
+        int n;
+        cin>>n;
     }
 
 
