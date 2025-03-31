@@ -1,81 +1,49 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-/*
+int main() {
+    string num1 = "123", num2 = "456";
 
+    int n = num1.size(), m = num2.size();
 
-def longest_beautiful_sequence(N, M):
-    candidates = {N}  # Start with N itself
-    
-    # Iterate over each bit position we can modify
-    for i in range(60):  # Since 2^60 > 10^18, this covers all cases
-        bit = 1 << i  # Get the i-th bit
-        
-        if (N & bit) == 0:  # If the bit is NOT set in N
-            new_candidates = set()
-            for x in candidates:
-                new_x = x | bit  # Set this bit in x
-                
-                if new_x <= M:  # Ensure it does not exceed M
-                    new_candidates.add(new_x)
-            
-            candidates.update(new_candidates)
-    
-    # Convert to sorted list
-    candidates = sorted(candidates)
+    vector<int> ans(n+m, 0);
 
-    # Find the largest valid subset where every pair satisfies (X_i & X_j) = N
-    longest_seq = []
-    for i in range(len(candidates)):
-        valid_seq = [candidates[i]]
-        for j in range(i + 1, len(candidates)):
-            if all((valid_seq[k] & candidates[j]) == N for k in range(len(valid_seq))):
-                valid_seq.append(candidates[j])
+    int t1 = 0; 
+    int t2 = 0; 
 
-        if len(valid_seq) > len(longest_seq):
-            longest_seq = valid_seq
+    for (int i = n-1;i>=0;i--) {
+        int carry = 0;
+        int d1 = num1[i]-'0';
+        t2 = 0;
 
-    # Print result
-    if len(longest_seq) > 1:
-        print(*longest_seq)
-    else:
-        print(-1)
-
-# Example test
-N, M = map(int, input().split())
-longest_beautiful_sequence(N, M)
-
-
-
-*/
-
-
-int main(){
-
-    int n =3;
-    int m =7;
-
-    vector<int> arr = {n};
-
-    for(int i=0;i<60;i++){
-        int bit = 1<<i;
-
-        if(n&bit ==0 ){
-            set<int> temp;
-            for(int j=0;i<arr.size();j++){
-                int t = arr[j] | bit;
-                if(t<=m){
-                    temp.insert(t);
-                }
-            }
-
-            
+        for (int j = m - 1; j >= 0; j--) {
+            int d2 = num2[j] - '0';
+            int sum = d1 * d2 + ans[t1 + t2] + carry;
+            carry = sum / 10;
+            ans[t1+t2] = sum%10;
+            t2++;
         }
 
+        if (carry > 0)
+            ans[t1+t2] += carry;
+
+        t1++;
     }
+
+    int i=ans.size()-1;
+    while (i>=0 && ans[i]==0)
+        i--;
+
+    string ans2="";
+
+    while (i>=0)
+        ans2+=(ans[i--]+'0');
+
+    cout<<ans2<<"\n";
 
     return 0;
 }
+
 
 
 // #include<bits/stdc++.h>
