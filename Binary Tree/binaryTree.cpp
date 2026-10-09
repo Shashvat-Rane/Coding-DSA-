@@ -17,7 +17,7 @@ class node {
     }
 };
 
-node* buildTree(node* root) {
+node* buildTree() {
     int d;
     cin>>d;
 
@@ -25,13 +25,15 @@ node* buildTree(node* root) {
         return nullptr;
     }
 
-    root = new node(d);
+    node* root = new node(d);
 
     // cout<<"Enter the data for inserting in Left of "<<d<<endl;
-    root->left = buildTree(root->left);
+    root->left = buildTree();
     
     // cout<<"Enter the data for inserting in Right of "<<d<<endl;
-    root->right = buildTree(root->right);
+    root->right = buildTree();
+
+    return root;
 }
 
 void levelOrderTraversal(node* root){
@@ -40,7 +42,7 @@ void levelOrderTraversal(node* root){
     q.push(nullptr);
 
     while(!q.empty()){
-        node * temp = q.front();
+        node* temp = q.front();
         q.pop();
 
         if(temp == nullptr){
@@ -51,10 +53,10 @@ void levelOrderTraversal(node* root){
         }
         else{
             cout<<temp->data<<" ";
-            if(temp->left != nullptr){
+            if(temp->left){
                 q.push(temp->left);
             }
-            if(temp->right != nullptr){
+            if(temp->right){
                 q.push(temp->right);
             }
         }
@@ -116,25 +118,13 @@ int main(){
           3       5
          / \     / 
         7  11  17
+    
+     // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
     */
 
-    root = buildTree(root); // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
-    // levelOrderTraversal(root);
-    // reverseLevelOrderTraversal(root);
+    root = buildTree();
+    levelOrderTraversal(root);
+    reverseLevelOrderTraversal(root);
 
     return 0;
 }
-
-
-
-/*
-
-Shashvat Rane
-shashvatrane24@gmail.com
-2024 - CSE
-Ready to relocate to Indore - Yes
-Immediate joining within 15 days - Yes
-Current Location - Mysore
-
-
-*/

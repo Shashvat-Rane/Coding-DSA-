@@ -255,6 +255,7 @@ int main(){
 
 // Sort a stack using recursion without using any loop
 
+/*
 void insertAtCorrectPosition(stack<int> &st,int n){
     if(st.empty()){
         st.push(n);
@@ -317,8 +318,62 @@ int main(){
 
     return 0;
 }
+*/
 
 
+// Next smaller element
 
-// Minimum Cost to Make String Valid
+vector<int> nextSmaller(vector<int> arr){
+    stack<int> st;
+    stack<int> temp;
+    vector<int> ans;
+    st.push(-1);
 
+    for(int i=arr.size()-1;i>=0;i--){
+        while(st.top() >= arr[i]){
+            st.pop();
+        }
+        temp.push(st.top());
+        st.push(arr[i]);
+    }
+    while(!temp.empty()){
+        ans.push_back(temp.top());
+        temp.pop();
+    }
+    return ans;
+}
+
+vector<int> prevSmaller(vector<int> arr){
+    stack<int> st;
+    vector<int> temp;
+    st.push(-1);
+
+    for(int i=0;i<arr.size();i++){
+        while(st.top() >= arr[i]){
+            st.pop();
+        }
+        temp.push_back(st.top());
+        st.push(arr[i]);
+    }
+    return temp;
+}
+
+void printArr(vector<int> arr){
+    for(int i : arr){
+        cout<<i<<" ";
+    }
+    cout<<endl;
+}
+
+int main() {
+
+    vector<int> arr = {5,2,6,1};
+
+    vector<int> nextS = nextSmaller(arr);
+    vector<int> prevS = prevSmaller(arr);
+
+    printArr(nextS);
+    printArr(prevS);
+
+    return 0;
+}

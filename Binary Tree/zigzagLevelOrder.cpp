@@ -32,6 +32,8 @@ node* buildTree(node* root) {
     
     // cout<<"Enter the data for inserting in Right of "<<d<<endl;
     root->right = buildTree(root->right);
+
+    return root;
 }
 
 vector<vector<int>> zigzagLevelOrderTraversal(node* root){
@@ -47,13 +49,14 @@ vector<vector<int>> zigzagLevelOrderTraversal(node* root){
     q.push(nullptr);
 
     vector<int> temp;
-    bool ltor = true;
+    bool ltr = true;
 
     while(!q.empty()){
-        node* t = q.front();
+        node* front = q.front();
         q.pop();
-        if(t==nullptr){
-            if(ltor){
+
+        if(front == nullptr){
+            if(ltr){
                 ans.push_back(temp);
                 temp.clear();
             }
@@ -62,20 +65,19 @@ vector<vector<int>> zigzagLevelOrderTraversal(node* root){
                 ans.push_back(temp);
                 temp.clear();
             }
-            ltor = !ltor;
+            ltr=!ltr;
             if(!q.empty()){
                 q.push(nullptr);
             }
-            continue;
         }
-
-        temp.push_back(t->data);
-
-        if(t->left){
-            q.push(t->left);
-        }
-        if(t->right){
-            q.push(t->right);
+        else{
+            temp.push_back(front->data);
+            if(front->left){
+                q.push(front->left);
+            }
+            if(front->right){
+                q.push(front->right);
+            }
         }
     }
     return ans;

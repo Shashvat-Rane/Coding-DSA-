@@ -78,6 +78,17 @@ vector<vector<int>> verticalTraversal(node* root){
 
 }
 
+void verticalTraversalBT(node* root,map<int,vector<int>> &ans, int hd){
+    if(root == nullptr){
+        return;
+    }
+
+    ans[hd].push_back(root->data);
+    verticalTraversalBT(root->left,ans,hd-1);
+    verticalTraversalBT(root->right,ans,hd+1);
+    
+}
+
 
 
 int main(){
@@ -85,19 +96,33 @@ int main(){
     node* root = nullptr;
 
     root = buildTree(root);     // input = 1 3 7 15 -1 -1 -1 11 10 -1 -1 -1 5 17 20 -1 -1 -1 -1
-                                // input = 1 2 4 -1 -1 5 -1 -1 3 6 -1 8 -1 -1 7 -1 9 -1 -1
+                                // input = 1 2 4 -1 -1 6 -1 -1 3 5 -1 8 -1 -1 7 -1 9 -1 -1
 
     cout<<"\n\n";
 
-    vector<vector<int>> ans = verticalTraversal(root);
+    // first approach
+
+    // vector<vector<int>> ans = verticalTraversal(root);
+
+    // for(auto i : ans){
+    //     for(auto j : i)
+    //         cout<<j<<" ";
+    // }
+
+
+    // cout<<"\n\n";
+
+
+    //second approach
+
+    map<int,vector<int>> ans;
+    verticalTraversalBT(root,ans,0);
 
     for(auto i : ans){
-        for(auto j : i)
+        for(auto j : i.second){
             cout<<j<<" ";
+        }
     }
-
-
-    cout<<"\n\n";
 
     return 0;
 }
@@ -115,11 +140,11 @@ int main(){
    15   10  20
 
 
-            1                            4 , 2 , 1 , 5 , 6 , 3 , 8 , 7 , 9
+            1                            4 , 2 , 1 , 6 , 5 , 3 , 8 , 7 , 9
           /   \
          2     3
         / \   / \
-       4   5 6   7
+       4   6 5   7
               \   \
                8   9
 

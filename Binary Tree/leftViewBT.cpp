@@ -71,6 +71,23 @@ vector<int> leftViewBT(node* root){
     return ans;
 }
 
+void leftView(node* root,int lvl,map<int,int> &mp){
+    if(root == nullptr){
+        return;
+    }
+
+    if(!mp[lvl]){
+        mp[lvl] = root->data;
+    }
+
+    if(root->left){
+        leftView(root->left,lvl+1,mp);
+    }
+    if(root->right){
+        leftView(root->right,lvl+1,mp);
+    }
+}
+
 
 
 int main(){
@@ -86,6 +103,15 @@ int main(){
 
     for(auto i : ans){
         cout<<i<<" ";
+    }
+    cout<<"\n\n";
+
+    map<int,int> mp;
+
+    leftView(root,0,mp);
+
+    for(auto i : mp){
+        cout<<i.second<<" ";
     }
 
 

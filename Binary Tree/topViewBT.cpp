@@ -34,59 +34,77 @@ node* buildTree(node* root) {
     root->right = buildTree(root->right);
 }
 
-vector<int> topViewBT(node* root){
-    vector<int> ans;
+// vector<int> topViewBT(node* root){
+//     vector<int> ans;
 
+//     if(root == nullptr){
+//         return ans;
+//     }
+
+//     map<int,int> nodes;
+
+//     queue<pair<node*,int>> q;
+//     q.push(make_pair(root,0));
+
+//     while(!q.empty()){
+//         pair<node*,int> t = q.front();
+//         q.pop();
+
+//         if(nodes.find(t.second) == nodes.end()){
+//             nodes[t.second] = t.first->data;
+//         }
+
+//         if(t.first->left){
+//             q.push(make_pair(t.first->left,t.second-1));
+//         }
+
+//         if(t.first->right){
+//             q.push(make_pair(t.first->right,t.second+1));
+//         }
+//     }
+
+//     for(auto i : nodes){
+//         ans.push_back(i.second);
+//     }
+
+//     return ans;
+// }
+
+void topView(node* root,map<int,int> &ans,int hd){
     if(root == nullptr){
-        return ans;
+        return;
     }
-
-    map<int,int> nodes;
-
-    queue<pair<node*,int>> q;
-    q.push(make_pair(root,0));
-
-    while(!q.empty()){
-        pair<node*,int> t = q.front();
-        q.pop();
-
-        if(nodes.find(t.second) == nodes.end()){
-            nodes[t.second] = t.first->data;
-        }
-
-        if(t.first->left){
-            q.push(make_pair(t.first->left,t.second-1));
-        }
-
-        if(t.first->right){
-            q.push(make_pair(t.first->right,t.second+1));
-        }
+    if(!ans[hd]){
+        ans[hd] = root->data;
     }
-
-    for(auto i : nodes){
-        ans.push_back(i.second);
-    }
-
-    return ans;
+    topView(root->left,ans,hd-1);
+    topView(root->right,ans,hd+1);
 }
-
-
 
 int main(){
 
     node* root = nullptr;
 
     root = buildTree(root);     // input = 1 3 7 15 -1 -1 -1 11 10 -1 -1 -1 5 17 20 -1 -1 -1 -1
-                                // input = 1 2 4 -1 -1 5 -1 -1 3 6 -1 8 -1 -1 7 -1 9 -1 -1
+                                // input = 1 2 4 -1 -1 5 -1 12 -1 -1 3 6 -1 8 -1 -1 7 -1 9 -1 -1
 
     cout<<"\n\n";
 
-    vector<int> ans = topViewBT(root);
+    // vector<int> ans = topViewBT(root);
+
+    // for(auto i : ans){
+    //     cout<<i<<" ";
+    // }
+
+    // second approach
+
+    map<int,int> ans;
+
+    topView(root,ans,0);
 
     for(auto i : ans){
-        cout<<i<<" ";
+        cout<< i.second <<" ";
     }
-
 
     cout<<"\n\n";
 
