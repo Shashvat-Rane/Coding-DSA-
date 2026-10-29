@@ -59,6 +59,7 @@
 }
 
 .primary-navigation .cart-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -69,6 +70,21 @@
 .cart-link svg {
   width: 21px;
   height: 21px;
+}
+
+.cart-count {
+  display: grid;
+  min-width: 19px;
+  height: 19px;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #2457d6;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .menu-toggle {

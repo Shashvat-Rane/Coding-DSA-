@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Header.css'
 
-function Header() {
+function Header({ cartItemCount }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const closeMenu = () => setMenuOpen(false)
@@ -35,7 +35,12 @@ function Header() {
           <a href="#home" onClick={closeMenu}>Home</a>
           <a href="#shop" onClick={closeMenu}>Shop</a>
           <a href="#contact" onClick={closeMenu}>Contact</a>
-          <a className="cart-link" href="#cart" onClick={closeMenu}>
+          <a
+            className="cart-link"
+            href="#cart"
+            onClick={closeMenu}
+            aria-label={`Cart, ${cartItemCount} ${cartItemCount === 1 ? 'item' : 'items'}`}
+          >
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
@@ -50,6 +55,11 @@ function Header() {
               <circle cx="18" cy="20" r="1" />
             </svg>
             <span>Cart</span>
+            {cartItemCount > 0 && (
+              <span className="cart-count" aria-hidden="true">
+                {cartItemCount}
+              </span>
+            )}
           </a>
         </nav>
       </div>

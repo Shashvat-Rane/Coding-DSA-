@@ -7,6 +7,24 @@ import ShopPage from './components/Shop/ShopPage.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState(() => window.location.hash)
+  const [cartItems, setCartItems] = useState({})
+
+  const cartItemCount = Object.values(cartItems).reduce(
+    (total, quantity) => total + quantity,
+    0,
+  )
+
+  const updateCartQuantity = (productId, quantity) => {
+    setCartItems((currentItems) => {
+      if (quantity === 0) {
+        const remainingItems = { ...currentItems }
+        delete remainingItems[productId]
+        return remainingItems
+      }
+
+      return { ...currentItems, [productId]: quantity }
+    })
+  }
 
   useEffect(() => {
     const updatePage = () => setCurrentPage(window.location.hash)
@@ -20,11 +38,16 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header cartItemCount={cartItemCount} />
       {currentPage === '#contact'
         ? <ContactPage />
         : currentPage === '#shop'
-          ? <ShopPage />
+          ? (
+            <ShopPage
+              cartItems={cartItems}
+              onCartQuantityChange={updateCartQuantity}
+            />
+          )
           : <HomePage />}
     </div>
   )

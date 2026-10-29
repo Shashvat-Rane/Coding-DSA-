@@ -12,18 +12,19 @@ function ProductCard({
   piecesPerUnit,
   price,
   images,
+  quantity,
+  onQuantityChange,
 }) {
-  const [quantity, setQuantity] = useState(0)
   const [galleryOpen, setGalleryOpen] = useState(false)
   const [activeImage, setActiveImage] = useState(0)
   const [touchStart, setTouchStart] = useState(null)
   const galleryRef = useRef(null)
 
-  const addToCart = () => setQuantity(minimumOrderQuantity)
+  const addToCart = () => onQuantityChange(minimumOrderQuantity)
   const removeFromCart = () => {
-    setQuantity((currentQuantity) => (
-      currentQuantity <= minimumOrderQuantity ? 0 : currentQuantity - 1
-    ))
+    onQuantityChange(
+      quantity <= minimumOrderQuantity ? 0 : quantity - 1
+    )
   }
 
   useEffect(() => {
@@ -105,7 +106,7 @@ function ProductCard({
               className="quantity-button"
               type="button"
               aria-label={`Add one ${name}`}
-              onClick={() => setQuantity((currentQuantity) => currentQuantity + 1)}
+              onClick={() => onQuantityChange(quantity + 1)}
             >
               +
             </button>

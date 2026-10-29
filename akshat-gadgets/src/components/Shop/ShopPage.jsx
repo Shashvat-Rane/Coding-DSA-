@@ -63,7 +63,7 @@ const products = [
   },
 ]
 
-function ShopPage() {
+function ShopPage({ cartItems, onCartQuantityChange }) {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [priceSort, setPriceSort] = useState('')
@@ -136,6 +136,8 @@ function ShopPage() {
                 key={product.id}
                 {...product}
                 price={priceFormatter.format(product.price)}
+                quantity={cartItems[product.id] ?? 0}
+                onQuantityChange={(quantity) => onCartQuantityChange(product.id, quantity)}
               />
             ))
           ) : (
